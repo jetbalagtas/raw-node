@@ -16,9 +16,12 @@ const server = http.createServer((req, res) => {
     req.on('data', (chunk) => {
       console.log(chunk);
       body.push(chunk);
+      console.log('body: ', body);
+      
     });
     req.on('end', () => {
       const parsedBody = Buffer.concat(body).toString();
+      console.log('parsedBody: ', parsedBody)
       const message = parsedBody.split('=')[1];
       fs.writeFileSync('message.txt', message);
     });
